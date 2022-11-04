@@ -32,7 +32,7 @@
       <console name="Connection" type="STANDARD" schema="" session="Main" />
     </connection>
     <connection id="1360795c-e4fb-453a-90e3-6eaaa8dcd364">
-      <console name="aws_db" type="STANDARD" schema="mysql" session="Main" />
+      <console name="aws_db" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
