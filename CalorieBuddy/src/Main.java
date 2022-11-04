@@ -1,7 +1,7 @@
 import java.sql.*;
 public class Main {
     public static void main(String[] args) {
-        System.out.println("test");
+        System.out.println("test123");
 
         //testing database  connection
         String databaseURL = "jdbc:mysql://localhost";
