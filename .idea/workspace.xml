@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2fefacf9-bc13-4741-a735-fcb2e99a4c92" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CalorieBuddy/src/Login.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CalorieBuddy/src/LoginFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CalorieBuddy/src/Registration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CalorieBuddy/src/SignUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CalorieBuddy/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/CalorieBuddy/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SE370-2022-Team6-Nutrition_Tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SE370-2022-Team6-Nutrition_Tracker.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +46,13 @@
   }
 }</component>
   <component name="RunManager">
+    <configuration name="Login" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Login" />
+      <module name="SE370-2022-Team6-Nutrition_Tracker" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="LoginFormDemo.java" />
       <method v="2">
