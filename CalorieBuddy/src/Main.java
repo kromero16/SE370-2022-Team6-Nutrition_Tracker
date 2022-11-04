@@ -4,9 +4,9 @@ public class Main {
         System.out.println("test123");
 
         //testing database  connection
-        String databaseURL = "jdbc:mysql://localhost";
+        String databaseURL = "jdbc:mysql://db1.cojsra38kk1x.us-west-2.rds.amazonaws.com";
         String user = "root";
-        String password = "admin";
+        String password = "csusmpassword";
         Connection conn = null;
         try {
            Class.forName("com.mysql.cj.jdbc.Driver");
