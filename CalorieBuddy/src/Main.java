@@ -1,6 +1,7 @@
-import java.sql.*;
+
 public class Main {
     public static void main(String[] args) {
+<<<<<<< HEAD
         System.out.println("test123");
 
         //testing database  connection
@@ -29,5 +30,8 @@ public class Main {
                 }
             }
         }
+=======
+        System.out.println("CHANGE MADE");
+>>>>>>> parent of 12ea9b4 (test db connection)
     }
 }
