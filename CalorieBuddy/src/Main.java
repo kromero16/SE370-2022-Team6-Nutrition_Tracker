@@ -31,7 +31,6 @@ public class Main {
         }
     }
 }
-/*
 (*jjo
 
         +import java.awt.event.ActionListener;
@@ -367,4 +366,3 @@ Index: CalorieBuddy/src/Registration.java
         \ No newline at end of file
 
         *)
-        */
