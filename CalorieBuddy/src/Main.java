@@ -1,6 +1,7 @@
 
 public class Main {
     public static void main(String[] args) {
+<<<<<<< HEAD
 
         System.out.println("test123");
 
@@ -31,6 +32,9 @@ public class Main {
             }
         }
 
+        System.out.println("CHANGE MADE");
+>>>>>>> parent of 12ea9b4 (test db connection)
+=======
         System.out.println("CHANGE MADE");
 >>>>>>> parent of 12ea9b4 (test db connection)
     }
