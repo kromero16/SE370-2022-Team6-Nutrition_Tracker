@@ -5,12 +5,17 @@ import java.sql.*;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		//test output
 		System.out.println("Changed IDE!");
+		
+		//create registration form object
+		//new RegistrationForm();
 
 		//testing database  connection
-        String databaseURL = "jdbc:mysql://db1.cojsra38kk1x.us-west-2.rds.amazonaws.com";
+        String databaseURL = "jdbc:mysql://database-1.cojsra38kk1x.us-west-2.rds.amazonaws.com";
         String user = "root";
-        String password = "csusmpassword";
+        String password = "iVAY65ivErrpcXTr6J9g";
         Connection conn = null;
         try {
            Class.forName("com.mysql.cj.jdbc.Driver");
