@@ -10,10 +10,10 @@ public class Main {
 		System.out.println("Changed IDE!");
 		
 		//create registration form object
-		//new RegistrationForm();
+		new RegistrationForm();
 
-		//testing database  connection
-        String databaseURL = "jdbc:mysql://database-1.cojsra38kk1x.us-west-2.rds.amazonaws.com";
+	/*	//testing database  connection
+        String databaseURL = "jdbc:mysql://database-1.cojsra38kk1x.us-west-2.rds.amazonaws.com:3306/CalorieBuddy";
         String user = "root";
         String password = "iVAY65ivErrpcXTr6J9g";
         Connection conn = null;
@@ -37,7 +37,7 @@ public class Main {
                     ex.printStackTrace();
                 }
             }
-        }
+        }*/
 	}
 
 }

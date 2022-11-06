@@ -85,7 +85,7 @@ public class RegistrationForm implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//create database variables
-		String databaseURL = "jdbc:mysql://database-1.cojsra38kk1x.us-west-2.rds.amazonaws.com";
+		String databaseURL = "jdbc:mysql://database-1.cojsra38kk1x.us-west-2.rds.amazonaws.com:3306/CalorieBuddy";
         String user = "root";
         String password = "iVAY65ivErrpcXTr6J9g";
         Connection connection = null;
@@ -94,20 +94,21 @@ public class RegistrationForm implements ActionListener {
 			try {    
 				//Create Connection Object
 		        Class.forName("com.mysql.cj.jdbc.Driver");
-				connection = DriverManager.getConnection("databaseURL, user, password");
+				connection = DriverManager.getConnection(databaseURL, user, password);
 				
 				if (connection != null) {
 	                System.out.println("Connected to the database");
 	            }
 				
-				/*//Prepared Statement
-				PreparedStatement Pstatement = connection.prepareStatement("insert into Users values (?,?,?,?)");
+				//Prepared Statement
+				PreparedStatement Pstatement = connection.prepareStatement("insert into Users values (?,?,?,?,?)");
 				
 				//Specifying parameter values
-				Pstatement.setString(1, nameTextField.getText());
-				Pstatement.setString(2, userNameField.getText());
-				Pstatement.setString(3, passwordField.getText());
-				Pstatement.setString(4, confirmPasswordField.getText());
+				Pstatement.setString(1, null);
+				Pstatement.setString(2, nameTextField.getText());
+				Pstatement.setString(3, userNameField.getText());
+				Pstatement.setString(4, passwordField.getText());
+				Pstatement.setString(5, confirmPasswordField.getText());
 				
 				//check if passwords match
 				if(passwordField.getText().equalsIgnoreCase(confirmPasswordField.getText())) {
@@ -116,7 +117,7 @@ public class RegistrationForm implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Data Registered Successfully");
 				}else {
 					JOptionPane.showMessageDialog(null, "Password did not match");
-				}*/
+				}
 				
 			}catch(SQLException e1) {
 				e1.printStackTrace();
@@ -144,4 +145,5 @@ public class RegistrationForm implements ActionListener {
 			confirmPasswordField.setText("");
 		}
 	}
+	
 }
