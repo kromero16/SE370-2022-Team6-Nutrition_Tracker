@@ -12,7 +12,7 @@ public class Main {
 		System.out.println("Testing API");
 		
 		//create registration form object
-		//new RegistrationForm();
+	    new RegistrationForm();
 
 
 	}
