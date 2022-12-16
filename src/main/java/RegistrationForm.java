@@ -137,7 +137,7 @@ public class RegistrationForm implements ActionListener {
 					}
 				
 					//Prepared Statement
-					PreparedStatement Pstatement = connection.prepareStatement("insert into Users values (?,?,?,?,?)");
+					PreparedStatement Pstatement = connection.prepareStatement("insert into Users values (?,?,?,?,?,?,?,?,?)");
 				
 					//Specifying parameter values
 					Pstatement.setString(1, ID);
@@ -145,6 +145,10 @@ public class RegistrationForm implements ActionListener {
 					Pstatement.setString(3, userNameField.getText());
 					Pstatement.setString(4, passwordField.getText());
 					Pstatement.setString(5, confirmPasswordField.getText());
+					Pstatement.setString(6, null);
+					Pstatement.setString(7, null);
+					Pstatement.setString(8, null);
+					Pstatement.setString(9, null);
 				
 					//check if passwords match
 					if(passwordField.getText().equalsIgnoreCase(confirmPasswordField.getText())) {

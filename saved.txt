@@ -1,18 +1,18 @@
 {
   "items": [
     {
-      "sodium_mg": 767,
-      "sugar_g": 3.6,
-      "fat_total_g": 11.2,
-      "cholesterol_mg": 35,
-      "protein_g": 16.2,
-      "name": "chicken sandwich",
-      "fiber_g": 1.4,
+      "sodium_mg": 54,
+      "sugar_g": 0,
+      "fat_total_g": 0.6,
+      "cholesterol_mg": 46,
+      "protein_g": 29.4,
+      "name": "tuna",
+      "fiber_g": 0,
       "serving_size_g": 100,
-      "calories": 243.9,
-      "fat_saturated_g": 2.1,
-      "carbohydrates_total_g": 20.9,
-      "potassium_mg": 184
+      "calories": 133.3,
+      "fat_saturated_g": 0.2,
+      "carbohydrates_total_g": 0,
+      "potassium_mg": 331
     }
   ]
 }

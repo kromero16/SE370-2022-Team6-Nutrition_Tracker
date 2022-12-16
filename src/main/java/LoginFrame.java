@@ -3,11 +3,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class LoginFrame extends JFrame implements ActionListener {
     /**
@@ -22,20 +38,23 @@ public class LoginFrame extends JFrame implements ActionListener {
     
     int WindowContain = 0;
 
-    JLabel userLabel = new JLabel("USERNAME");
-    JLabel passwordLabel = new JLabel("PASSWORD");
+    JLabel userLabel = new JLabel("Username");
+    JLabel passwordLabel = new JLabel("Password");
     JTextField userTextField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
 
-    JButton loginButton = new JButton("LOGIN");
-    JButton resetButton = new JButton("RESET");
-    JButton registerButton = new JButton("CREATE ACCOUNT");
+    JButton loginButton = new JButton("Login");
+    JButton resetButton = new JButton("Reset");
+    JButton registerButton = new JButton("Create Account");
 
     JCheckBox showPassword = new JCheckBox("Show Password");
 
     JPanel box = new JPanel();
     JPanel boxBackground = new JPanel();
-
+    
+    
+    JLabel label = new JLabel();
+    
     
     LoginFrame() {
         setLayoutManager();
@@ -49,6 +68,13 @@ public class LoginFrame extends JFrame implements ActionListener {
         container.setLayout(null);
     }
     public void setLocationAndSize() {
+    	
+    	
+        label.setIcon(new ImageIcon("/Users/kromero/eclipse-workspace/SE370_Project/src/main/java/pic1.jpg"));
+        Dimension size = label.getPreferredSize();
+        label.setBounds(500,200,size.width+100, size.height+100);
+        		
+
         userLabel.setBounds(550, 350, 100, 30);//was 550, 400
         passwordLabel.setBounds(550, 390, 100, 30);//was 50, 220
 
@@ -63,13 +89,24 @@ public class LoginFrame extends JFrame implements ActionListener {
 
         box.setBounds(480, 300, 400, 290);
         box.setBackground(Color.WHITE);
+        
+        Border raisedetched = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
+        Border raisedbevel = BorderFactory.createRaisedBevelBorder();
+       
+        box.setBorder(raisedetched);
+        
+		//Border.setBorder(new LineBorder(Color.black, 5));
 
         boxBackground.setBounds(480, 300, 410, 300);
 
         showPassword.setBackground(Color.WHITE);
 
     }
-    public void addComponentsToContainer() {
+   
+
+	public void addComponentsToContainer() {
+    	container.add(label);
+
         container.add(userLabel);
         container.add(passwordLabel);
         container.add(userTextField);
@@ -79,6 +116,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         container.add(resetButton);
         container.add(registerButton);
         container.add(box);
+
     }
 
     public void addActionEvent() {
@@ -99,6 +137,12 @@ public class LoginFrame extends JFrame implements ActionListener {
         //Coding Part of LOGIN button
         if (e.getSource() == loginButton) {
         	String userName = userTextField.getText();
+        	
+        	//Globally save username so currently logged in user is known 
+        	User.userName = userTextField.getText();
+        	
+        	//System.out.print(User.userName);
+        	
         	String pass = passwordField.getText();
         	
         	try {
@@ -116,12 +160,42 @@ public class LoginFrame extends JFrame implements ActionListener {
 				
 				ResultSet rs = Pstatement.executeQuery();
 				if(rs.next()) {
-					dispose();
+					//dispose(); removed to return to login from MenuFrame
 					//create main home page here
 					JButton btn = new JButton("TEST");
 					JOptionPane.showMessageDialog(btn, "Successfully Logged in");
-					MenuFrame a = new MenuFrame();
-					//show main menu
+					
+					
+					//at this point the user is logged
+					
+					
+					//add condition if calorie goal is null then redirect to characteristics collect
+					//else send to menuframe if calorie goal is not null
+					
+					
+					
+					//create new prepared statement
+					PreparedStatement findIfNewUser = connection.prepareStatement("SELECT GoalValue FROM mydb.Users WHERE USERNAME=?");
+					findIfNewUser.setString(1, userName);
+					
+					ResultSet res = findIfNewUser.executeQuery();
+					
+					boolean newUser=false;
+					
+					if(res.next()) {
+						
+						Double goal = res.getDouble(1);
+					
+						userTextField.setText("");
+			            passwordField.setText("");
+						if(res.wasNull() == true)
+						{
+							new CharacteristicsCollect();
+						}
+						else {
+							new MenuFrame();
+						}
+					}
 				}else {
 					JButton btn = new JButton("TEST");
 					JOptionPane.showMessageDialog(btn, "Wrong username & password");

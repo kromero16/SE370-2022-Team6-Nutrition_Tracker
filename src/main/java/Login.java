@@ -6,8 +6,8 @@ public class Login {
 	public void nLogin() {
         LoginFrame frame = new LoginFrame();
         
-        frame.setTitle("Login Form");
-        frame.getContentPane().setBackground(Color.getHSBColor(257,71,100));
+        frame.setTitle("Calorie App - Login");
+        frame.getContentPane().setBackground(Color.getHSBColor(300,290,100));
         frame.setVisible(true);
         frame.setBounds(0,0, 1366, 1050);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,4 +1,4 @@
-//package CalorieBuddy;
+
 
 import java.awt.Choice;
 import java.awt.Color;
@@ -8,6 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -40,6 +45,7 @@ public class CharacteristicsCollect implements ActionListener {
 	JLabel M_Chosen = new JLabel("Man");
 
 	JTextField Weight_Inp = new JTextField();
+	
 	JTextField Height_Inp = new JTextField();
 	JTextField Age_Inp = new JTextField();
 	
@@ -50,6 +56,8 @@ public class CharacteristicsCollect implements ActionListener {
     final Choice c = new Choice();  
     double Calc_BMR;
     double Calc_RMR;
+    
+    //initial value of goal for user
     double Goal_Value;
     
     final Choice g = new Choice();  
@@ -63,9 +71,9 @@ public class CharacteristicsCollect implements ActionListener {
 	JFrame frame = new JFrame();
 
 	
-   
+   JButton To_Menu = new JButton("Continue");
 	
-	CharacteristicsCollect(){
+	public CharacteristicsCollect(){
 		//call method 
 		createWindow();
 		setLocationAndSize();
@@ -83,7 +91,7 @@ public class CharacteristicsCollect implements ActionListener {
 		Height.setBounds(520, 135, 100,20);
 		Age.setBounds(545, 160, 100,20);
 
-		panel.setBounds(500, 70, 400, 600);
+		panel.setBounds(490, 70, 425, 600);
 		
 		Weight_Inp.setBounds(600, 110, 100,20);
 		Height_Inp.setBounds(600, 135, 100,20);
@@ -95,9 +103,10 @@ public class CharacteristicsCollect implements ActionListener {
 		Height.setFont(new Font("Courier", Font.PLAIN, 14)); 
 		Age.setFont(new Font("Courier", Font.PLAIN, 14)); 
 		
-		BMR_User1.setBounds(520, 170, 400, 50);
-		BMR_User2.setBounds(520, 185, 400, 50);
-		BMR_User3.setBounds(520, 200, 400, 50);
+		BMR_User1.setBounds(495, 170, 400, 50);
+		BMR_User2.setBounds(495, 185, 420, 50);
+		BMR_User3.setBounds(495, 200, 400, 50);
+		
 		
 		BMR_User4.setBounds(510, 450, 400,50);
 		BMR_User5.setBounds(510, 465, 400, 50);
@@ -138,10 +147,16 @@ public class CharacteristicsCollect implements ActionListener {
 	    RMR_Result.setBounds(595,450,80,20);
 	    
 	    Caloric_Goal.setBounds(660, 600, 120, 20);
+	    
+	    To_Menu.setBounds(775, 600, 100, 50);
 	}
 	
 	public void addComponentsToFrame() {
 		//frame.add();
+		frame.add(To_Menu);
+		frame.add(Weight_Inp);
+		frame.add(Height_Inp);
+		frame.add(Age_Inp);
 		frame.add(Caloric_Goal);
 		frame.add(DCG_Output);
 		frame.add(BMR_Result);
@@ -165,9 +180,9 @@ public class CharacteristicsCollect implements ActionListener {
 		frame.add(Height);
 		frame.add(Age);
 		frame.add(panel);
-		frame.add(Weight_Inp);
-		frame.add(Height_Inp);
-		frame.add(Age_Inp);
+		
+		
+		//
 	
 	}
 	
@@ -175,10 +190,10 @@ public class CharacteristicsCollect implements ActionListener {
 	public void createWindow() {
 		//Setting properties of JFrame
 
-		frame.setTitle("CharacteristicsCollect");
+		frame.setTitle("Enter Your Information");
 		frame.setBounds(40,40,380,600);
 		//frame.getContentPane().setBackground(Color.pink);
-        frame.getContentPane().setBackground(Color.getHSBColor(257,71,100));
+        frame.getContentPane().setBackground(Color.getHSBColor(300,290,100));
 
 		frame.setLayout(null);
 		
@@ -217,9 +232,70 @@ public class CharacteristicsCollect implements ActionListener {
 		BMR.addActionListener(this);
 		LS_confirm.addActionListener(this);
 		UG_confirm.addActionListener(this);
+		To_Menu.addActionListener(this);
 		}
 	
 	public void actionPerformed(ActionEvent e) {
+		//create database variables
+        String databaseURL = "jdbc:mysql://database-1.cojsra38kk1x.us-west-2.rds.amazonaws.com:3306/mydb";
+    	String user = "root";
+    	String password = "iVAY65ivErrpcXTr6J9g";
+    	Connection connection = null;
+    	
+		if(e.getSource() == To_Menu)
+		{
+			if(Goal_Value != 0)
+			{
+				//Here we can save the GoalValue to the database and link to logged in user
+				try {
+					
+			    	
+			    	Class.forName("com.mysql.cj.jdbc.Driver");
+					connection = DriverManager.getConnection(databaseURL, user, password);
+					if (connection != null) {
+						System.out.println("Connected to the database CharCollect");
+					}
+					//convert goalValue from double to String for DB statement
+					String goalString = (""+Goal_Value);
+					
+					//create new prepared statement
+					PreparedStatement Pstatement = connection.prepareStatement("UPDATE mydb.Users SET GoalValue=? WHERE USERNAME=?");
+					Pstatement.setString(1, goalString);
+					Pstatement.setString(2, User.userName);
+					
+					int res = Pstatement.executeUpdate();
+					
+					//if(res.next()) {
+						
+	
+					//}
+					
+				}catch(SQLException sqlException) {
+					sqlException.printStackTrace();
+				}
+				catch(ClassNotFoundException ex) {
+					ex.printStackTrace();
+				}
+				finally {
+					if(connection != null) {
+						try {
+							connection.close();
+						}catch(SQLException ex) {
+							ex.printStackTrace();
+						}
+					}
+				}
+				
+				frame.dispose();
+				MenuFrame a = new MenuFrame();
+			}
+			else
+			{
+				JButton btn1 = new JButton("TEST");
+				JOptionPane.showMessageDialog(btn1, "Complete Form");
+
+			}
+		}
 		if(e.getSource() == BMR)
 		{
 			
@@ -321,7 +397,9 @@ public class CharacteristicsCollect implements ActionListener {
 			{
 				Goal_Value -=500;
 			}
-		    String CG = Double.toString(Calc_RMR);
+			
+			
+		    String CG = Double.toString(Goal_Value);
  
 			Caloric_Goal.setText(CG);
 			
@@ -331,6 +409,3 @@ public class CharacteristicsCollect implements ActionListener {
 	}
 	
 }
-
-
-

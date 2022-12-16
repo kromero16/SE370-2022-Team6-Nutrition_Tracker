@@ -11,9 +11,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class NutritionInfo {	
-	public void getNutrInfo(String n) throws UnsupportedEncodingException, UnirestException, FileNotFoundException {
+	public String getNutrInfo(String n) throws UnsupportedEncodingException, UnirestException, FileNotFoundException {
      String host = "https://calorieninjas.p.rapidapi.com/v1/nutrition";
      String charset = "UTF-8";
      // Headers for a request
@@ -34,19 +39,49 @@ public class NutritionInfo {
   			.asJson(); 
 	    	    
 	    	    
-   	  //Formatting JSON
+   	  	  //Formatting JSON
    	      Gson gson = new GsonBuilder().setPrettyPrinting().create();
    	      JsonParser jp = new JsonParser();
    	      JsonElement je = jp.parse(response.getBody().toString());
    	      String prettyJsonString = gson.toJson(je);
    	      System.out.println(prettyJsonString);
    	      
-   	      //save JSON query to file 	      
-   	     PrintWriter out = new PrintWriter("saved.txt");
-   	     out.println(prettyJsonString);
-   	     out.close();
+   	      return prettyJsonString;
+   	      
+   	  /*    //Parse JSON
+   	      JSONObject obj = new JSONObject(prettyJsonString);
+   	      //JSONObject items = obj.getJSONObject("items");
+   	      JSONArray arr = obj.getJSONArray("items");
+   	      
+   	      double cal=0.0;
+   	      double protein=0.0;
+   	      
+   	      for(int i=0;i<arr.length();i++) {
+   	    	  JSONObject object = arr.getJSONObject(i);
+   	    	  cal = object.getDouble("calories");
+   	    	  protein = object.getDouble("protein_g");
+   	      }
+   	      
+   	      System.out.print("Calories were: "+cal+"\n");
+   	      System.out.print("Protein content is: "+protein+"\n");*/
 
-		
+   	     
+	}
+	
+	public double getCalories(String js) {
+		  JSONObject obj = new JSONObject(js);
+ 	      //JSONObject items = obj.getJSONObject("items");
+ 	      JSONArray arr = obj.getJSONArray("items");
+ 	      
+		  double cal=0.0;
+ 	      
+ 	      for(int i=0;i<arr.length();i++) {
+ 	    	  JSONObject object = arr.getJSONObject(i);
+ 	    	  cal = object.getDouble("calories");
+ 	    	 
+ 	      }
+ 	      
+ 	      return cal;
 	}
    	    
 }
